@@ -1,3 +1,8 @@
+package Encapsulation2;
+
+import Encapsulation2.Curier;
+import Encapsulation2.Dimensions;
+
 public class Main {
     public static void main(String[] args) {
         Curier curier = new Curier(new Dimensions(100,50,20),5,"sportivnaya 26",false,"A105",true);

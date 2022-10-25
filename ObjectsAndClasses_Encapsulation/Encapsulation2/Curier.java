@@ -1,3 +1,5 @@
+package Encapsulation2;
+
 public class Curier {
     private final Dimensions dimensions;
     private final int mass;

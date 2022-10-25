@@ -1,3 +1,5 @@
+package Encapsulation2;
+
 public class Dimensions {
     private final int lengths;
     private final int width;
