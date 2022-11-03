@@ -22,23 +22,23 @@ public class Computer {
                 monitorType.getMonitorWeight() + keyboardType.getKeyboardWeight();
     }
 
-    public Computer setProcessor(ProcessorType processorType) {
-        return new Computer(this.vendor, this.name, processorType, this.ramType, this.hddType, this.monitorType, this.keyboardType);
+    public void setProcessor(ProcessorType processorType) {
+        this.processorType = processorType;
     }
-    public Computer setRam(RAMType ramType) {
-        return new Computer(this.vendor, this.name, this.processorType, ramType, this.hddType, this.monitorType, this.keyboardType);
-    }
-
-    public Computer setHdd(HDDType hddType) {
-        return new Computer(this.vendor, this.name, this.processorType, this.ramType, hddType, this.monitorType, this.keyboardType);
+    public void setRam(RAMType ramType) {
+        this.ramType = ramType;
     }
 
-    public Computer setMonitor(MonitorType monitorType) {
-        return new Computer(this.vendor, this.name, this.processorType, this.ramType, this.hddType, monitorType, this.keyboardType);
+    public void setHdd(HDDType hddType) {
+        this.hddType = hddType;
     }
 
-    public Computer setKeyboard(KeyboardType keyboardType) {
-        return new Computer(this.vendor, this.name, this.processorType, this.ramType, this.hddType, this.monitorType, keyboardType);
+    public void setMonitor(MonitorType monitorType) {
+        this.monitorType = monitorType;
+    }
+
+    public void setKeyboard(KeyboardType keyboardType) {
+        this.keyboardType = keyboardType;
     }
 
 
@@ -61,7 +61,10 @@ public class Computer {
                 + "Общий вес компьютера: " + getTotalWeight();
 
     }
+
+
 }
+
 
 
 
