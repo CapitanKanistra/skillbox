@@ -82,6 +82,11 @@
             <scope>system</scope>
             <systemPath>${basedir}/lib/airport-1.0.1.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>ru.skillbox</groupId>
+            <artifactId>LambdaExpressions-Airport</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>
