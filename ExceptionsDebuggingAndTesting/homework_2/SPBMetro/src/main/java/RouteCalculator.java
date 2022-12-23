@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class RouteCalculator {
-    private final StationIndex stationIndex;
+    public StationIndex stationIndex;
 
     private static final double INTER_STATION_DURATION = 2.5;
     private static final double INTER_CONNECTION_DURATION = 3.5;
