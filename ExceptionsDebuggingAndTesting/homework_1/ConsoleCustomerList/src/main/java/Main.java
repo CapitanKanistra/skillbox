@@ -1,6 +1,10 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Scanner;
 
 public class Main {
+    private static Logger logger;
 
 
     private static final String ADD_COMMAND = "add Василий Петров " +
@@ -12,6 +16,12 @@ public class Main {
     private static final String HELP_TEXT = "Command examples:\n" + COMMAND_EXAMPLES;
 
     public static void main(String[] args) {
+        logger = LogManager.getLogger(Main.class);
+
+        logger.info("We've just greeted the user!");
+
+        logger.error("We've just greeted the user!");
+
 
 
         Scanner scanner = new Scanner(System.in);
@@ -35,6 +45,7 @@ public class Main {
                 } else if (tokens[0].equals("help")) {
                     System.out.println(HELP_TEXT);
                 } else {
+                    logger.info("ОШИБКА");
                     System.out.println(COMMAND_ERROR);
                 }
             } catch (IllegalArgumentException ex) {
