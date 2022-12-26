@@ -1,80 +1,85 @@
 import core.Line;
 import core.Station;
-import junit.framework.TestCase;
 import java.util.List;
+
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import junit.framework.TestCase;
 
-public class RouteCalculatorTest extends TestCase
-{
-    List<Station> lineDirect;
-    List<Station> lineWithOneChange;
-    List<Station> lineWithTwoChange;
+public class RouteCalculatorTest extends TestCase {
+
+    List<Station> threeTransfersRoute;
+    List<Station> twoTransfersRoute;
+    List<Station> noTransferRoute;
+
     StationIndex stationIndex;
     RouteCalculator calculator;
 
-    Station per;
-    Station vtor;
-    Station tre;
-    Station chet;
+    Station moskovskaya;
+    Station sadovaya;
+    Station omskaya;
+    Station ozernaya;
+
 
     @Override
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
+
+
         stationIndex = new StationIndex();
 
-        Line line1 = new Line(1, "Красная");
-        Line line2 = new Line(2, "Желтая");
-        Line line3 = new Line(3, "Зеленая");
+        Line line1 = new Line(1, "Первая");
+        Line line2 = new Line(2, "Вторая");
+        Line line3 = new Line(3, "Третья");
 
-        per = new Station("Первая", line1);
-        vtor = new Station("Вторая", line1);//2.5
-        Station zvetnoiBulvar = new Station("Цветной бульвар", line2);//3.5
-        tre = new Station("Третья", line2);//2.5
-        Station sretenskiiBulvar= new Station("Сретенский бульвар", line2);//3.5
-        chet= new Station("Четвертая", line3);//2.5 14.5
-
+        moskovskaya = new Station("Московская", line1);
+        Station kyrskaya = new Station("Курская", line1);
+        omskaya = new Station("Омская", line1);
+        ozernaya = new Station("Озерная", line2);
+        Station zaprudnaya = new Station("Запрудная", line2);
+        Station morskaya = new Station("Морская", line2);
+        sadovaya = new Station("Садовая", line3);
+        Station teplichanaya = new Station("Тепличная", line3);
+        Station ogorodnaya = new Station("Огородная", line3);
 
         Stream.of(line1, line2, line3).forEach(stationIndex::addLine);
-        Stream.of(per, vtor,zvetnoiBulvar,tre, sretenskiiBulvar, chet)
-                .peek(s -> s.getLine().addStation(s)).forEach(stationIndex :: addStation);
-        stationIndex.addConnection(Stream.of(zvetnoiBulvar, sretenskiiBulvar).collect(Collectors.toList()));
-        stationIndex.getConnectedStations(zvetnoiBulvar);
-        stationIndex.getConnectedStations(sretenskiiBulvar);
+        Stream
+                .of(moskovskaya, kyrskaya, omskaya, ozernaya, zaprudnaya, morskaya, sadovaya, teplichanaya,
+                        ogorodnaya).peek(s -> s.getLine().addStation(s)).forEach(stationIndex::addStation);
+        stationIndex.addConnection(Stream.of(kyrskaya, zaprudnaya).collect(Collectors.toList()));
+        stationIndex.addConnection(Stream.of(morskaya, ogorodnaya).collect(Collectors.toList()));
+        stationIndex.getConnectedStations(kyrskaya);
+        stationIndex.getConnectedStations(morskaya);
 
         calculator = new RouteCalculator(stationIndex);
 
-        lineDirect = Stream.of(per, vtor).collect(Collectors.toList());
-        lineWithOneChange = Stream.of(per,vtor,zvetnoiBulvar,tre).collect(Collectors.toList());
-        lineWithTwoChange= Stream.of(per,vtor,zvetnoiBulvar,tre,sretenskiiBulvar,chet).collect(Collectors.toList());
-
+        //тестовые маршруты
+        noTransferRoute = Stream.of(moskovskaya, kyrskaya, omskaya).collect(Collectors.toList());
+        twoTransfersRoute = Stream.of(moskovskaya, kyrskaya, zaprudnaya, ozernaya)
+                .collect(Collectors.toList());
+        threeTransfersRoute = Stream
+                .of(moskovskaya, kyrskaya, zaprudnaya, morskaya, ogorodnaya, teplichanaya, sadovaya)
+                .collect(Collectors.toList());
     }
 
-    public void testCalculateDuration()
-    {
-        double actual = RouteCalculator.calculateDuration(lineWithTwoChange);
-        double expected = 14.5;
+    public void testCalculateDuration() {
+        double actual = RouteCalculator.calculateDuration(threeTransfersRoute);
+        double expected = 17;
         assertEquals(expected, actual);
     }
 
     public void testGetShortestRoute() {
+        List<Station> actualNoTransfer = calculator.getShortestRoute(moskovskaya, omskaya);
+        List<Station> actualTwoTransfer = calculator.getShortestRoute(moskovskaya, ozernaya);
+        List<Station> actualThreeTransfers = calculator.getShortestRoute(moskovskaya, sadovaya);
 
-        List<Station> actualLineDirect = calculator.getShortestRoute(per,vtor);
-        List<Station> actualLineWithOneChange = calculator.getShortestRoute(per,tre);
-        List<Station> actualLineWithTwoChange = calculator.getShortestRoute(per,chet);
+        List<Station> expectedNoTransfers = noTransferRoute;
+        List<Station> expectedTwoTransfers = twoTransfersRoute;
+        List<Station> expectedThreeTransfers = threeTransfersRoute;
 
-        List<Station> expectedLineDirect = lineDirect;
-        List<Station> expectedLineWithOneChange = lineWithOneChange;
-        List<Station> expectedLineWithTwoChange = lineWithTwoChange;
-
-        assertEquals(actualLineDirect, expectedLineDirect);
-        assertEquals(actualLineWithOneChange, expectedLineWithOneChange);
-        assertEquals(actualLineWithTwoChange, expectedLineWithTwoChange);
+        assertEquals(actualNoTransfer, expectedNoTransfers);
+        assertEquals(actualTwoTransfer, expectedTwoTransfers);
+        assertEquals(actualThreeTransfers, expectedThreeTransfers);
     }
 
-    @Override
-    public void tearDown() throws Exception
-    {
-        super.tearDown();
-    }
+
 }
