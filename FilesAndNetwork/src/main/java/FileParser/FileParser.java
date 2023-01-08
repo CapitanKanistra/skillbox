@@ -23,7 +23,7 @@ public class FileParser {
         ParseMoscowUnderground parser = new ParseMoscowUnderground();
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonFile = Files.readString(Paths.get("DataCollector\\map.json"));
+        String jsonFile = Files.readString(Paths.get("D:/DataCollector/map.json"));
         JsonNode jsonData = objectMapper.readTree(jsonFile);
         JsonNode stationNmae = jsonData.get("stations");
         JsonNode lineName = jsonData.get("lines");
