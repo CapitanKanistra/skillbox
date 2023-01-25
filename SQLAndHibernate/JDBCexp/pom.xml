@@ -8,9 +8,7 @@
     <artifactId>JDBCexp</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>lesson2/HibernateCreate</module>
-    </modules>
+
 
     <dependencies>
         <dependency>
@@ -18,6 +16,17 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.32</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.2.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.3.04</version>
+        </dependency>
+
     </dependencies>
 
     <properties>
