@@ -5,6 +5,19 @@ import java.util.List;
 @Table(name="Courses")
 
 public class Course {
+    public List<PurchaseList> getPurchaselist() {
+        return purchaselist;
+    }
+
+    public void setPurchaselist(List<PurchaseList> purchaselist) {
+        this.purchaselist = purchaselist;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Subscriptions",joinColumns = {@JoinColumn(name = "course_id")},
+    inverseJoinColumns= {@JoinColumn(name ="subscription_date")}
+    )
+    private List<PurchaseList>purchaselist;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

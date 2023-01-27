@@ -33,6 +33,8 @@ public class Main {
                 System.out.println("Список учеников:" + "\n" + student.getName());
             }
 
+            System.out.println("\n" + "Всего купленно курсов:" + "\n" + course.getPurchaselist().size());//ManyToMany PurchaselList
+
 
 
             transaction.commit();
