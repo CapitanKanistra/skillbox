@@ -5,12 +5,19 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.mapping.PrimaryKey;
 
 import java.util.List;
 
+import static org.hibernate.id.PersistentIdentifierGenerator.PK;
+
 
 public class Main {
-    public static void main(String[] args) {
+
+
+        public static void main(String[] args) {
+
+
 
 
 
@@ -34,6 +41,11 @@ public class Main {
             }
 
             System.out.println("\n" + "Всего купленно курсов:" + "\n" + course.getPurchaselist().size());//ManyToMany PurchaselList
+
+                Subscriptions subscriptions = session.get(Subscriptions.class, new SubscriptionsKey(1,2));
+                System.out.println(subscriptions.getStudentId() + " + " + subscriptions.getCourseId() + " + " + subscriptions.getSubscriptionDate());
+
+
 
 
 

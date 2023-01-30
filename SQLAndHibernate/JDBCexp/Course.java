@@ -1,10 +1,11 @@
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="Courses")
 
-public class Course {
+public class Course implements Serializable {
     public List<PurchaseList> getPurchaselist() {
         return purchaselist;
     }
@@ -126,6 +127,8 @@ public class Course {
     public void setPricePerHour(float pricePerHour) {
         this.pricePerHour = pricePerHour;
     }
+
+
 
 
 }
