@@ -15,6 +15,8 @@ import java.util.Objects;
 
 public class SubscriptionsKey implements Serializable {
 
+
+
     public int getStudentId() {
         return studentId;
     }

@@ -6,23 +6,9 @@ import java.util.List;
 @Table(name="Courses")
 
 public class Course implements Serializable {
-    public List<PurchaseList> getPurchaselist() {
-        return purchaselist;
-    }
-
-    public void setPurchaselist(List<PurchaseList> purchaselist) {
-        this.purchaselist = purchaselist;
-    }
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Subscriptions",joinColumns = {@JoinColumn(name = "course_id")},
-    inverseJoinColumns= {@JoinColumn(name ="subscription_date")}
-    )
-    private List<PurchaseList>purchaselist;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String name;
     private int duration;
     @Enumerated(EnumType.STRING)
@@ -30,22 +16,35 @@ public class Course implements Serializable {
     private CourseType type;
     private String description;
 
-
-
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)//Teacher
     private Teacher teacher;
     @Column(name="students_count")
     private int studentsCount;
-    private int price;
+    private int price;//Teacher
     @Column(name="price_per_hour")
     private float pricePerHour;
-
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "Subscriptions", joinColumns = {@JoinColumn(name = "course_id")},
-            inverseJoinColumns = {@JoinColumn(name = "student_id")}
+    @JoinTable(name = "Subscriptions",//student
+            joinColumns = {@JoinColumn(name = "course_id")},
+            inverseJoinColumns = {@JoinColumn(name = "student_id")})
+    private List<Student> students;
+
+
+    @ManyToMany(cascade = CascadeType.ALL)//purchaselist
+    @JoinTable(name = "Subscriptions",joinColumns = {@JoinColumn(name = "course_id")},
+            inverseJoinColumns= {@JoinColumn(name ="subscription_date")}
     )
-    private  List<Student>students;
+    private List<PurchaseList>purchaselist;
+
+
+
+    public List<PurchaseList> getPurchaselist() {
+        return purchaselist;
+    }
+
+    public void setPurchaselist(List<PurchaseList> purchaselist) {
+        this.purchaselist = purchaselist;
+    }
 
     public List<Student> getStudents() {
         return students;
