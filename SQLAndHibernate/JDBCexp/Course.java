@@ -30,21 +30,21 @@ public class Course implements Serializable {
     private List<Student> students;
 
 
-    @ManyToMany(cascade = CascadeType.ALL)//purchaselist
+/*    @ManyToMany(cascade = CascadeType.ALL)//purchaselist//конфликт
     @JoinTable(name = "Subscriptions",joinColumns = {@JoinColumn(name = "course_id")},
             inverseJoinColumns= {@JoinColumn(name ="subscription_date")}
     )
-    private List<PurchaseList>purchaselist;
+    private List<PurchaseList>purchaselist;*/
 
 
 
-    public List<PurchaseList> getPurchaselist() {
-        return purchaselist;
-    }
+/*    public List<PurchaseList> getPurchaselist() {//конфликт
+        return purchaselist;*/
+/*    }
 
     public void setPurchaselist(List<PurchaseList> purchaselist) {
         this.purchaselist = purchaselist;
-    }
+    }*/
 
     public List<Student> getStudents() {
         return students;

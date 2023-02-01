@@ -12,7 +12,8 @@ import java.util.List;
 public class Student implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+
     private String name;
     @Column(name = "registration_date")
     private Date registrationDate;

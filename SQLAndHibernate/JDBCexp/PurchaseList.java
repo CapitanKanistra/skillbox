@@ -4,13 +4,15 @@ import java.util.Date;
 @Entity
 @Table(name = "purchaselist")
 public class PurchaseList {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EmbeddedId
+    private PurchListKey id;//new +++ ,@Id
+/*    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)*///конфликт
     @Column(name = "subscription_date")
     private Date subscriptionDate;
-    @Column(name = "student_name")
+    @Column(name = "student_name",insertable = false, updatable = false)//new
     private String studentName;
-    @Column (name = "course_name")
+    @Column (name = "course_name", insertable = false, updatable = false)//new
     private String couseName;
     private int price;
 
