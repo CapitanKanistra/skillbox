@@ -15,13 +15,13 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("file:D:\\github\\SQLAndHibernate\\JDBCexp\\resources\\hibernate.cfg.xml").build();
+/*        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("file:D:\\github\\SQLAndHibernate\\JDBCexp\\resources\\hibernate.cfg.xml").build();
 
         Metadata metadata = new MetadataSources(registry).getMetadataBuilder().build();
         SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
 
         Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        Transaction transaction = session.beginTransaction();*/
 /*        Course course = session.get(Course.class, 1);        //lesson1-2
         System.out.println(course.getName() + " - " + course.getStudentsCount() + " человек.");
 
@@ -35,9 +35,9 @@ public class Main {
         System.out.println("\n" + "Всего купленно курсов:" + "\n" + course.getPurchaselist().size());//ManyToMany PurchaselList*/
 
 
-        List<Course> courses = session.get(Student.class, 1).getCourses();
+        /*List<Course> courses = session.get(Student.class, 1).getCourses();
         for (Course course : courses)
-            System.out.println(course.getName());
+            System.out.println(course.getName());*///конфликт
 
 
         /*CriteriaBuilder builder=session.getCriteriaBuilder();
@@ -51,6 +51,30 @@ public class Main {
         }*/
 
 
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hqlPurchase = "FROM " + PurchaseList.class.getSimpleName();
+        List<PurchaseList> purchaseList = session.createQuery(hqlPurchase).getResultList();
+
+        session.beginTransaction();
+        for(PurchaseList purchase : purchaseList) {
+
+            CriteriaBuilder builder = session.getCriteriaBuilder();//то, что строит запросы //урок (16.11)
+            CriteriaQuery<Course> courseQuery = builder.createQuery(Course.class);//формирование запроса
+            Root<Course> courseRoot = courseQuery.from(Course.class);//выбор таблицы, от которой отталкиваемя
+            courseQuery.select(courseRoot).where(builder.equal(courseRoot.get("name"), purchase.getCourseName()));
+            Course course = session.createQuery(courseQuery).getSingleResult();
+
+            CriteriaQuery<Student> studentQuery = builder.createQuery(Student.class);
+            Root<Student> studentRoot = studentQuery.from(Student.class);
+            studentQuery.select(studentRoot).where(builder.equal(studentRoot.get("name"), purchase.getStudentName()));
+            Student student = session.createQuery(studentQuery).getSingleResult();
+
+            LinkedPurchaseList linkedPurchaseList = new LinkedPurchaseList();
+            linkedPurchaseList.setId(new LinkedPurchListKey(course.getId(), student.getId()));//уникальный ключ
+            linkedPurchaseList.setCourseId(course.getId());
+            linkedPurchaseList.setStudentId(student.getId());
+            session.save(linkedPurchaseList);
+        }
 
 
 
@@ -58,9 +82,8 @@ public class Main {
 
 
 
-        transaction.commit();
-        sessionFactory.close();
 
-
+        session.getTransaction().commit();
+        session.close();
     }
 }

@@ -13,7 +13,7 @@ public class PurchaseList {
     @Column(name = "student_name",insertable = false, updatable = false)//new
     private String studentName;
     @Column (name = "course_name", insertable = false, updatable = false)//new
-    private String couseName;
+    private String CourseName;
     private int price;
 
     public Date getSubscriptionDate() {
@@ -32,12 +32,12 @@ public class PurchaseList {
         this.studentName = studentName;
     }
 
-    public String getCouseName() {
-        return couseName;
+    public String getCourseName() {
+        return CourseName;
     }
 
-    public void setCouseName(String couseName) {
-        this.couseName = couseName;
+    public void setCourseName(String courseName) {
+        this.CourseName = courseName;
     }
 
     public int getPrice() {
