@@ -8,7 +8,7 @@ import java.util.List;
 public class Course implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private int duration;
     @Enumerated(EnumType.STRING)
@@ -16,10 +16,10 @@ public class Course implements Serializable {
     private CourseType type;
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)//Teacher
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)//Teacher
     private Teacher teacher;
-    @Column(name="students_count")
-    private int studentsCount;
+    @Column(name="students_count",nullable = true)
+    private Integer studentsCount;
     private int price;//Teacher
     @Column(name="price_per_hour")
     private float pricePerHour;
@@ -131,5 +131,4 @@ public class Course implements Serializable {
 
 
 }
-
 
