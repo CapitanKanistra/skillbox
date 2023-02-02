@@ -36,7 +36,6 @@ public class ImageResizer extends Thread {
                         image.getHeight() / (image.getWidth() / (double) newWidth)
                 );
 
-
                 /*BufferedImage newImage = new BufferedImage(
                         newWidth, newHeight, BufferedImage.TYPE_INT_RGB);*///не нать
 
@@ -53,6 +52,8 @@ public class ImageResizer extends Thread {
                         scaledImg.setRGB(x, y, rgb);
                     }
                 }*///вроде тоже
+
+
 
                 File newFile = new File(dstFolder + "/" + file.getName());
                 ImageIO.write(scaledImg, "jpg", newFile);

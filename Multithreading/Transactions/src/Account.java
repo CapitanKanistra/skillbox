@@ -1,21 +1,32 @@
+package src;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Account {
 
     private long money;
     private String accNumber;
+    private Boolean isBlocked;
 
-    public long getMoney() {
-        return money;
-    }
-
-    public void setMoney(long money) {
-        this.money = money;
-    }
-
-    public String getAccNumber() {
-        return accNumber;
-    }
-
-    public void setAccNumber(String accNumber) {
+    public Account (String accNumber, long money) {
         this.accNumber = accNumber;
+        this.money = money;
+        isBlocked = false;
+    }
+
+    public boolean getStatus() {
+        return isBlocked;
+    }
+    public void blockedAccount() {
+        isBlocked = true;
+        setMoney(0);
+    }
+
+    public String toString() {
+        return "Your account number: " + getAccNumber() +
+                ". And Your balance: " + getMoney() + " rub.";
     }
 }
