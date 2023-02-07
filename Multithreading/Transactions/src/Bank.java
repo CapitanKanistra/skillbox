@@ -16,10 +16,10 @@ public class Bank {
         Thread.sleep(1000);
         return random.nextBoolean();
     }
-    public void addAccount(Account account) {
+    public synchronized void addAccount(Account account) {
         accounts.put(account.getAccNumber(), account);
     }
-    public boolean isEnoughMoney(long fromAccountMoney, long amount) {
+    public synchronized boolean isEnoughMoney(long fromAccountMoney, long amount) {
         return fromAccountMoney >= amount;
     }
 
@@ -29,7 +29,7 @@ public class Bank {
      * метод isFraud. Если возвращается true, то делается блокировка счетов (как – на ваше
      * усмотрение)
      */
-    public void transfer(String fromAccountNum, String toAccountNum, long amount) {
+    public synchronized void transfer(String fromAccountNum, String toAccountNum, long amount) {
         long fraudLimit = 50000;
         boolean check = false;
         Account fromAccount = accounts.get(fromAccountNum);
@@ -70,7 +70,7 @@ public class Bank {
 
         return SumAllAccounts;
     }
-    public void setAccounts(ConcurrentHashMap<String, Account> accounts) {
+    public synchronized void setAccounts(ConcurrentHashMap<String, Account> accounts) {
         this.accounts = accounts;
     }
 }
