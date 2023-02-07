@@ -2,7 +2,7 @@ package src;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 
 public class Main {
@@ -37,7 +37,7 @@ public class Main {
         System.out.println("Сумма всех счетов: " + bank.getSumAllAccounts() + " руб.");
         System.out.println("Сумма всех счетов: " + bank2.getSumAllAccounts() + " руб.");
 
-        Vector<Thread> threadList = new Vector<>();
+        ArrayList<Thread> threadList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             threadList.add(
                     new Thread(() -> {
