@@ -43,12 +43,13 @@ public class CourseController {
         return new ResponseEntity(course, HttpStatus.OK);
     }
 
-    @PutMapping("/courses/{id}")
+    @RequestMapping(value = "/courses/{id}", method = RequestMethod.PUT)
     public ResponseEntity put(@PathVariable int id, Course courseNew) {
-        Course course = Storage.putCourse(id);
+        Course course = Storage.putCourse(id,courseNew);
         if (course == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
+
         return new ResponseEntity(courseNew, HttpStatus.OK);
     }
 }

@@ -28,9 +28,7 @@ public class Storage {
     public static Course deleteCourse(int courseId) {
         if (courses.containsKey(courseId)) {
             courses.remove(courseId);
-
         }
-
         return null;
     }
 
@@ -42,10 +40,20 @@ public class Storage {
         return null;
     }
 
-    public static Course putCourse(int courseId) {
+    public static Course putCourse(int courseId, Course courseNew) {
         if (courses.containsKey(courseId)) {
-            courses.
+
+            courses.put(courseId, courseNew);
 
         }
+        return null;
     }
+
 }
+
+
+
+
+
+
+
