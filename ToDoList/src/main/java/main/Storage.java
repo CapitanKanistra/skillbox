@@ -4,13 +4,14 @@ import response.Course;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 public class Storage {
     private static int currentId = 1;
 
 
-    private static HashMap<Integer, Course> courses = new HashMap<Integer, Course>();
+    private static Hashtable<Integer, Course> courses = new Hashtable<Integer, Course>();
 
     public static List<Course> getAllCourses() {
         ArrayList<Course> courseList = new ArrayList<Course>();
