@@ -54,7 +54,16 @@ public class CourseController {
         todolistRepository.deleteById(id);
         return new ResponseEntity(optionalCourse.get(), HttpStatus.OK);
     }
+    @RequestMapping(value = "/courses/", method = RequestMethod.DELETE)//deletAll
+    public List<Course> listD() {
+        Iterable<Course> courseIterable = todolistRepository.findAll();
+        ArrayList<Course> courses = new ArrayList<>();
+        for (Course course:courseIterable) {
+            todolistRepository.deleteAll();
 
+        }
+        return courses;
+    }
 
     @RequestMapping(value = "/courses/{id}", method = RequestMethod.PUT)//PUT
     public ResponseEntity put(@PathVariable int id, Course courseNew) {
