@@ -1,9 +1,8 @@
 package main;
 
-import response.Course;
+import main.model.Course;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
