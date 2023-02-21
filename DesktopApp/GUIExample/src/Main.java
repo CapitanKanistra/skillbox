@@ -2,11 +2,9 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater ( new Runnable () {
-            @Override
-            public void run() {
+
         JFrame frame = new JFrame();
-        frame.setSize(600,400);
+        frame.setSize(600, 400);
 
         frame.add(new MainForm().getMainPanel());
 
@@ -15,8 +13,6 @@ public class Main {
         frame.setVisible(true);
 
     }
-        } );
-
-    }
-
 }
+
+
