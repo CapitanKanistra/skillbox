@@ -22,8 +22,10 @@ public class MainForm {
     }
 
     public MainForm() {
+
+
         сollapseButton.addActionListener(ActionEvent -> {
-            if (collapseButton.getText().equals("Collapse")) {
+            if (сollapseButton.getText().equals("Collapse")) {
                 if (nameField.getText().isEmpty() || familiaField.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(mainPanel, "Заполните имя и фамилию.");
                     text.setText("");
@@ -39,12 +41,12 @@ public class MainForm {
                     otchText.setText("Имя, " +
                             "Отчество, " +
                             " Фамилия");
-                    collapseButton.setText("Expand");
+                    сollapseButton.setText("Expand");
                     text.setText("");
                     text1.setText("");
                     text2.setText("");
                 }
-            } else if (collapseButton.getText().equals("Expand")) {
+            } else if (сollapseButton.getText().equals("Expand")) {
                 var fio = otchField.getText().split("\n");
                 if (fio.length > 3) {
                     text.setText("");
@@ -74,16 +76,18 @@ public class MainForm {
                         familiaText.setVisible(true);
                         otchText.setText("Отчество");
                         familiaText.setText("Фамилия");
-                        nameField.setText("Имя");
-                        collapseButton.setText("Collapse");
+                        nameText.setText("Имя");
+                        сollapseButton.setText("Collapse");
                     }
                 }
             }
 
         });
+
     }
 
+
     private String collapseText() {
-        return nameField.getText() + "\n" + familiaField.getText() + "\n" + otchField.getText();
+        return nameField.getText() + "\n" + otchField.getText() + "\n" + familiaField.getText();
     }
 }
